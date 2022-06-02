@@ -1,3 +1,5 @@
+module army_days
+
 import os
 import flag
 import json
@@ -34,14 +36,12 @@ fn get_display_days(data DayEntries) []string {
 	show_completed := data.config["showCompleted"] or {false} as bool
 
 	for entry in data.entries {
-		ts := time.parse_iso8601(entry.date) or {continue}
-		delta_days := (ts - time.now()).hours() / 24.0
+		ts := time.parse_rfc3339(entry.date) or {continue}
+		delta_days := (ts - time.utc()).hours() / 24.0
 		mut text := "day"
 		mut int_days := int(delta_days)
-		if use_army_days {
-			if math.round(delta_days) != int_days {
-				text = "and a butt " + text
-			}
+		if use_army_days && math.round(delta_days) == int_days {
+			text = "and a butt " + text
 		} else {
 			int_days += 1
 		}
