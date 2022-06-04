@@ -1,10 +1,10 @@
-module army_days
-
+import arrays
 import os
 import flag
 import json
 import time
 import math
+import term
 
 type ConfigItem = string | bool | int | map[string]ConfigItem
 
@@ -61,10 +61,28 @@ fn get_display_days(data DayEntries) []string {
 	return result
 }
 
+
+fn filled_string(input_str string, length int) string {
+	temp_str := if input_str.len > length {input_str[0..length]} else {input_str}
+	return temp_str + ([]string{len: length - temp_str.len, init: " "}).join("")
+}
+
+
+fn output_days(strings []string) {
+	width, _ := term.get_terminal_size()
+	max_length := arrays.max(strings.map(it.len)) or { width }
+	
+	println(term.underline(term.yellow(filled_string(" Remaining Days", max_length))))
+	for i, line in strings {
+		bg := if i % 2 == 0 {0x101010} else {0x202020}
+		println(term.bg_hex(bg, filled_string(line, max_length)))
+	}
+}
+
 fn main() {
 	mut fp := flag.new_flag_parser(os.args)
 	fp.application('army-days')
-	fp.version('v0.0.1')
+	fp.version('v0.0.2')
 	fp.description('V-Powered Army Days countdown')
 	fp.skip_executable()
 	file_name := fp.string("filename", `f`, os.join_path_single(os.home_dir(), ".days.json"), "filename for days config")
@@ -78,5 +96,5 @@ fn main() {
 
 	data := get_config(file_name)
 	output := get_display_days(data)
-	println(output.join('\n'))
+	output_days(output)
 }

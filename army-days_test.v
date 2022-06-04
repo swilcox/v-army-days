@@ -1,4 +1,4 @@
-module army_days
+module main
 
 import time
 
@@ -91,11 +91,17 @@ fn test_today() {
 	}
 }
 
+fn test_filled_string() {
+	assert filled_string("test", 10) == "test      "
+	assert filled_string("this is too long", 10) == "this is to"
+	assert filled_string("this is to", 10) == "this is to"
+}
+
 /* missing:
 - get_config() bad / good results
 - a few other odd / bad code paths
+- testing output function
 - additional fractional days 2 hours etc...
 - swap out main() for other function so we can test (can't run main())
 - test command line params?
 */
-

@@ -1,12 +1,12 @@
 {
     "config": {
-        "useArmyButtDays": false,
+        "useArmyButtDays": true,
         "showCompleted": false
     },
     "entries": [
         {
             "title": "Today",
-            "date": "2022-05-30T00:00:00-05:00"
+            "date": "2022-05-30T00:00:00-04:00"
         },
         {
             "title": "Tomorrow",
@@ -14,7 +14,7 @@
         },
         {
             "title": "Army beats the hell out of Navy",
-            "date": "2022-12-10T00:00:00-05:00"
+            "date": "2022-12-10T00:00:00-04:00"
         },
         {
             "title": "Christmas",
