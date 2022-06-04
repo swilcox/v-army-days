@@ -2,7 +2,7 @@
 
 ## Overview
 
-This the VLang-based version.
+This is the VLang-based version.
 
 `army-days` CLI program to display the number of remaining days until a particular event.
 
